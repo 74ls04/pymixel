@@ -71,22 +71,22 @@ MX_POSITION_P_GAIN        = (84, 2)     # RW
 MX_FEEDFORWARD_2ND_GAIN   = (88, 2)     # RW
 MX_FEEDFORWARD_1ST_GAIN   = (90, 2)     # RW
 MX_BUS_WATCHDOG           = (98, 1)     # RW
-MX_GOAL_PWM               = (100, 2)     # RW
-MX_GOAL_VELOCITY          = (104, 4)     # RW
-MX_PROFILE_ACCELERATION   = (108, 4)     # RW
-MX_PROFILE_VELOCITY       = (112, 4)     # RW
-MX_GOAL_POSITION          = (116, 4)     # RW
-MX_REALTIME_TICK          = (120, 2)     # R
-MX_MOVING                 = (122, 1)     # R
-MX_MOVING_STATUS          = (123, 1)     # R
-MX_PRESENT_PWM            = (124, 2)     # R
-MX_PRESENT_LOAD           = (126, 2)     # R
-MX_PRESENT_VELOCITY       = (128, 4)     # R
-MX_PRESENT_POSITION       = (132, 4)     # R
-MX_VELOCITY_TRAJECTORY    = (136, 4)     # R
-MX_POSITION_TRAJECTORY    = (140, 4)     # R
-MX_PRESENT_INPUT_VOLTAGE  = (144, 2)     # R
-MX_PRESENT_TEMPERATURE    = (146, 1)     # R
+MX_GOAL_PWM               = (100, 2)    # RW
+MX_GOAL_VELOCITY          = (104, 4)    # RW
+MX_PROFILE_ACCELERATION   = (108, 4)    # RW
+MX_PROFILE_VELOCITY       = (112, 4)    # RW
+MX_GOAL_POSITION          = (116, 4)    # RW
+MX_REALTIME_TICK          = (120, 2)    # R
+MX_MOVING                 = (122, 1)    # R
+MX_MOVING_STATUS          = (123, 1)    # R
+MX_PRESENT_PWM            = (124, 2)    # R
+MX_PRESENT_LOAD           = (126, 2)    # R
+MX_PRESENT_VELOCITY       = (128, 4)    # R
+MX_PRESENT_POSITION       = (132, 4)    # R
+MX_VELOCITY_TRAJECTORY    = (136, 4)    # R
+MX_POSITION_TRAJECTORY    = (140, 4)    # R
+MX_PRESENT_INPUT_VOLTAGE  = (144, 2)    # R
+MX_PRESENT_TEMPERATURE    = (146, 1)    # R
 # fmt: on
 
 
@@ -176,7 +176,7 @@ class Pymixel:
         return self._read(MX_FIRMWARE_VERSION)
 
     @property
-    def id(self): # pylint: disable=invalid-name
+    def id(self):  # pylint: disable=invalid-name
         """Return the DYNAMIXEL ID."""
         return self._read(MX_ID)
 
@@ -412,7 +412,7 @@ class Pymixel:
         return self._read(MX_PRESENT_TEMPERATURE)
 
     @id.setter
-    def id(self, value): # pylint: disable=invalid-name
+    def id(self, value):  # pylint: disable=invalid-name
         """Set the DYNAMIXEL ID."""
         self._write(MX_ID, value)
 
@@ -595,17 +595,3 @@ class Pymixel:
             print(f"Abnormal response: {self.packet_handler.getTxRxResult(res)}")
         elif err != 0:
             print(f"Error: {self.packet_handler.getRxPacketError(err)}")
-
-
-if __name__ == __name__:
-    print("Debug mode...")
-    import time
-
-    motor = Pymixel("/dev/ttyS9", 1)
-    motor.torque_enable = 1
-
-    while True:
-        print(f'Voltage is: {motor.present_input_voltage / 10} V')
-        print(f'Temperature is {motor.present_temperature} degrees C')
-        time.sleep(1)
-
