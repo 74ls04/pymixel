@@ -1,1 +1,1 @@
-dynamixel-sdk
+dynamixel-sdk >= 3.7.31
